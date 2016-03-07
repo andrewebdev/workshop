@@ -1,0 +1,4 @@
+---
+- name: Configure Git
+  template: src=gitconfig.j2 dest=~/.gitconfig
+

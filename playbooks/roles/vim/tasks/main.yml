@@ -1,0 +1,12 @@
+---
+- name: Download our vim configuration
+  git: repo=https://github.com/andrewebdev/vimconfig.git
+       dest=~/.vim
+       force={{ force_reset }}
+
+- name: Link the vim rc file
+  file: src=~/.vim/.vimrc dest=~/.vimrc state=link
+
+- name: Install vim plugins
+  shell: vim +PluginInstall +qall
+

@@ -1,0 +1,23 @@
+---
+- name: Ensure that apt uses https
+  apt: pkg={{ item }} state=present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+  become: yes
+  become_method: sudo
+
+- name: Install Various dependencies required by the playbook
+  apt: pkg={{ item }} state=present
+  with_items:
+    - git
+    - gitg
+    - vim
+    - vim-gtk
+    - gem
+    - tmux
+    - python-virtualenv
+    - python-apt
+    - build-essential
+  become: yes
+  become_method: sudo

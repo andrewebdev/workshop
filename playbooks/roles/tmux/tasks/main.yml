@@ -1,0 +1,27 @@
+---
+- name: Check that the tmux dir exists
+  file:
+    path: ~/.tmux
+    state: directory
+
+- name: Configure Tmux
+  template:
+    src: tmux.conf.j2
+    dest: ~/.tmux/.tmux.conf
+
+- name: Symlink the config
+  file:
+    src: ~/.tmux/.tmux.conf
+    dest: ~/.tmux.conf
+    state: link
+
+- name: Install tmuxinator
+  shell: gem install tmuxinator
+  become: yes
+  become_method: sudo
+
+- name: Make sure tmuxinator directory exists
+  file:
+    path: ~/.tmuxinator
+    state: directory
+
