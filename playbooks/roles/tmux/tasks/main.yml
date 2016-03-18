@@ -25,3 +25,12 @@
     path: ~/.tmuxinator
     state: directory
 
+# Add the following to tmux conf manually
+# Get the powerline root via: `pip show powerline`
+#
+# source "{{ powerline_repo_root }}/powerline/bindings/tmux/powerline.conf"
+# run-shell "powerline-daemon -q"
+#
+# I'll add the steps above into the playbook some future time, probably
+# by including a shell script, but for the time being, do this manually.
+
