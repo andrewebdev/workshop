@@ -1,0 +1,22 @@
+# We use powerline in more than one app, so this roll will install
+# it globally, and should run before the tmux and vim roles
+---
+- name: Install powerline
+  shell: pip install powerline-status
+  become: yes
+  become_method: sudo
+
+- name: Download Powerline Fonts
+  git: repo=https://github.com/powerline/fonts.git
+       dest=~/installtmp
+
+- name: Run the fonts install script
+  shell: ~/installtmp/install.sh
+  args:
+    chdir: ~/installtmp
+
+- name: Now clean up the install folder
+  file:
+    path: ~/installtmp
+    state: absent
+

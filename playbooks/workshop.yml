@@ -4,8 +4,9 @@
   vars:
     force_reset: no
   roles:
-    - general
-    - git
-    - vim
-    - tmux
+    - {role: general, tags: ['general']}
+    - {role: git, tags: ['git']}
+    - {role: powerline, tags: ['powerline']}
+    - {role: vim, tags: ['vim']}
+    - {role: tmux, tags: ['tmux']}
 
