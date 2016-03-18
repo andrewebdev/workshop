@@ -12,8 +12,6 @@
   with_items:
     - git
     - gitg
-    - vim
-    - vim-gtk
     - gem
     - tmux
     - python-virtualenv
@@ -21,3 +19,4 @@
     - build-essential
   become: yes
   become_method: sudo
+
