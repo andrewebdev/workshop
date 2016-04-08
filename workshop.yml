@@ -9,4 +9,5 @@
     - {role: powerline, tags: ['powerline']}
     - {role: vim, tags: ['vim']}
     - {role: tmux, tags: ['tmux']}
+    - {role: lxd, tags: ['lxd']}
 
