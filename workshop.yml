@@ -8,6 +8,7 @@
     - {role: git, tags: ['git']}
     - {role: powerline, tags: ['powerline']}
     - {role: vim, tags: ['vim']}
+    - {role: neovim, tags: ['neovim']}
     - {role: tmux, tags: ['tmux']}
     - {role: lxd, tags: ['lxd']}
 
