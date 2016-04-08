@@ -16,6 +16,11 @@
   become: yes
   become_method: sudo
 
+- name: Ensure that NeoVim config folders exists
+  file: path={{ item }} state=directory
+  with_items:
+    - ~/.config/nvim/autoload/
+
 - name: Install NeoVim
   apt: pkg={{ item }} state=present
   with_items:
@@ -23,5 +28,19 @@
   become: yes
   become_method: sudo
 
-# - name: Install NeoVim Plugins
+- name: Download my neovim config
+  git: repo=https://github.com/andrewebdev/neovim-config.git
+       dest=~/.config/nvim
+       force={{ force_reset }}
+
+- name: Install NeoVim plugin manager
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: ~/.config/nvim/autoload/plug.vim
+
+- name: Install neovim python2 libs
+  command: pip2 install neovim
+
+- name: Install neovim python3 libs
+  command: pip3 install neovim
 

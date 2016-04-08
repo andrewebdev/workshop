@@ -13,7 +13,7 @@
   become: yes
   become_method: sudo
 
-- name: Download our vim configuration
+- name: Download my vim config
   git: repo=https://github.com/andrewebdev/vimconfig.git
        dest=~/.vim
        force={{ force_reset }}
