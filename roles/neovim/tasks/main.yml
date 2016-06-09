@@ -18,11 +18,6 @@
   become: yes
   become_method: sudo
 
-- name: Ensure that NeoVim config folders exists
-  file: path={{ item }} state=directory
-  with_items:
-    - ~/.config/nvim/autoload/
-
 - name: Install NeoVim
   apt: pkg={{ item }} state=present
   with_items:
@@ -33,7 +28,12 @@
 - name: Download my neovim config
   git: repo=https://github.com/andrewebdev/neovim-config.git
        dest=~/.config/nvim
-       force={{ force_reset }}
+       force=yes
+
+- name: Ensure that NeoVim config folders exists
+  file: path={{ item }} state=directory
+  with_items:
+    - ~/.config/nvim/autoload/
 
 - name: Install NeoVim plugin manager
   get_url:

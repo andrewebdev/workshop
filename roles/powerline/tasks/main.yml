@@ -9,6 +9,7 @@
 - name: Download Powerline Fonts
   git: repo=https://github.com/powerline/fonts.git
        dest=~/installtmp
+       force=yes
 
 - name: Run the fonts install script
   shell: ~/installtmp/install.sh

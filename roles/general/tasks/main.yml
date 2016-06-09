@@ -16,7 +16,9 @@
     - tmux
     - python-virtualenv
     - python-apt
+    - python-pip
     - build-essential
+    - glances
   become: yes
   become_method: sudo
 
