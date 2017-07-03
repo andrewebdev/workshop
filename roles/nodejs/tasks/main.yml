@@ -1,0 +1,17 @@
+---
+- name: Add the NodeJS PPA
+  shell: curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+  become: yes
+  become_method: sudo
+
+- name: Install nodejs
+  apt: pkg={{ item }} state=present
+  with_items:
+    - nodejs
+  become: yes
+  become_method: sudo
+
+- name: Update npm
+  shell: npm i -g npm
+  become: yes
+  become_method: sudo

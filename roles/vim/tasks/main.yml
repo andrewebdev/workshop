@@ -9,19 +9,14 @@
   with_items:
     - vim
     - vim-gtk
-    - python-rope
-  become: yes
-  become_method: sudo
-
-- name: Install ropevim dependency
-  shell: pip install ropevim
   become: yes
   become_method: sudo
 
 - name: Download my vim config
-  git: repo=https://github.com/andrewebdev/vimconfig.git
-       dest=~/.vim
-       force=yes
+  git:
+    repo: https://github.com/andrewebdev/vimconfig.git
+    dest: ~/.vim
+    force: yes
        
 - name: Install latest Vundle
   git:
@@ -31,7 +26,3 @@
 
 - name: Link the vim rc file
   file: src=~/.vim/.vimrc dest=~/.vimrc state=link
-
-# - name: Install vim plugins
-#   shell: vim +PluginInstall +qall
-

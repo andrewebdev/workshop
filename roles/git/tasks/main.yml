@@ -1,4 +1,11 @@
 ---
+- name: Install Various dependencies required by the playbook
+  apt: pkg={{ item }} state=present
+  with_items:
+    - git
+    - gitg
+  become: yes
+  become_method: sudo
+
 - name: Configure Git
   template: src=gitconfig.j2 dest=~/.gitconfig
-

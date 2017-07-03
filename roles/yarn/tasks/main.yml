@@ -1,0 +1,19 @@
+---
+- name: Add yarn public key
+  apt_key:
+    url: "https://dl.yarnpkg.com/debian/pubkey.gpg"
+    state: present
+  become: yes
+  become_method: sudo
+
+- name: Add the yarn repository
+  apt_repository:
+    repo: "deb https://dl.yarnpkg.com/debian/ stable main"
+    state: present
+  become: yes
+  become_method: sudo
+
+- name: Install packages
+  apt: pkg=yarn
+  become: yes
+  become_method: sudo

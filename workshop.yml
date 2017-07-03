@@ -1,14 +1,10 @@
 ---
-- hosts: 127.0.0.1
+- name: Set up the entire workshop
+  hosts: 127.0.0.1
   connection: local
   vars:
-    force_reset: no
-  roles:
-    - {role: general, tags: ['general']}
-    - {role: git, tags: ['git']}
-    - {role: powerline, tags: ['powerline']}
-    - {role: vim, tags: ['vim']}
-    - {role: neovim, tags: ['neovim']}
-    - {role: tmux, tags: ['tmux']}
-    - {role: lxd, tags: ['lxd']}
+    vim_force: no
 
+- include: general.yml
+- include: editors.yml
+- include: webdev.yml

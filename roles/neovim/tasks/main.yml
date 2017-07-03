@@ -2,6 +2,7 @@
 - name: Ensure that neovim dependencies exists
   apt: pkg={{ item }} state=present
   with_items:
+    - xclip
     - python-dev
     - python-pip
     - python-flake8
@@ -28,7 +29,8 @@
 - name: Download my neovim config
   git: repo=https://github.com/andrewebdev/neovim-config.git
        dest=~/.config/nvim
-       force=yes
+       force={{ vim_force }}
+  ignore_errors: true
 
 - name: Ensure that NeoVim config folders exists
   file: path={{ item }} state=directory
