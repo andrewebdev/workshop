@@ -30,7 +30,11 @@
   become_method: sudo
 
 - name: Add our user to the docker group
-  shell: "usermod -aG docker $USER"
+  user:
+    name: '{{ ansible_user_id }}'
+    groups:
+      - docker
+    append: yes
   become: yes
   become_method: sudo
 
@@ -38,5 +42,13 @@
   systemd:
     name: docker
     enabled: yes
+  become: yes
+  become_method: sudo
+
+- name: Install docker compose
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/1.14.0/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
+    dest: /usr/local/bin/docker-compose
+    mode: a+x
   become: yes
   become_method: sudo
