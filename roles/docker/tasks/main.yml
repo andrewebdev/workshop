@@ -1,0 +1,42 @@
+---
+- name: Store the release short code
+  shell: "lsb_release -cs"
+  register: lsb_release
+
+- name: Add docker repo keyserver key
+  apt_key:
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+  become: yes
+  become_method: sudo
+
+- name: Add the docker repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release.stdout }} stable"
+  become: yes
+  become_method: sudo
+
+- name: Install docker
+  apt:
+    pkg: "{{ item }}"
+  with_items:
+    - docker-ce
+  become: yes
+  become_method: sudo
+
+- name: Create the docker group
+  group:
+    name: docker
+  become: yes
+  become_method: sudo
+
+- name: Add our user to the docker group
+  shell: "usermod -aG docker $USER"
+  become: yes
+  become_method: sudo
+
+- name: Ensure docker starts on system boot
+  systemd:
+    name: docker
+    enabled: yes
+  become: yes
+  become_method: sudo

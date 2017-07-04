@@ -10,6 +10,9 @@
 - name: Install Various dependencies required by the playbook
   apt: pkg={{ item }} state=present
   with_items:
+    - curl
+    - software-properties-common
+    - lsb-core
     - ruby
     - gem
     - python-virtualenv
