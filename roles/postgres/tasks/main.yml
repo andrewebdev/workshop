@@ -6,5 +6,20 @@
     - postgresql
     - postgresql-contrib
     - pgadmin3
+    - python-psycopg2
   become: yes
   become_method: sudo
+
+
+# NOTE:
+# The fact that this is publically visible isn't a issue for me
+# since I'm only using postgres on my local machine for development.
+# If you ever want to use this role for anything important, you should really
+# use ansible_vault
+- name: Create the postgres role
+  postgresql_user:
+    name: "postgres"
+    password: "pgpass"
+  become: yes
+  become_method: sudo
+  become_user: postgres
