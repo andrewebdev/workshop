@@ -2,24 +2,37 @@
 - name: Install postgresql and pgadmin3
   apt:
     pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
   with_items:
     - postgresql
     - postgresql-contrib
-    - pgadmin3
     - python-psycopg2
+    - pgadmin3
+    - libpcre3
+    - libpcre3-dev
+    - zlib1g-dev
+    - libpq-dev
   become: yes
   become_method: sudo
 
+- name: Restart postgresql
+  service:
+    name: postgresql
+    state: restarted
 
 # NOTE:
 # The fact that this is publically visible isn't a issue for me
-# since I'm only using postgres on my local machine for development.
+# since I'm only using postgres on my local machine for development testing.
 # If you ever want to use this role for anything important, you should really
 # use ansible_vault
-- name: Create the postgres role
+- name: Create the dev postgres role
   postgresql_user:
     name: "postgres"
+    # echo -n "pgpass" | md5sum | cut -d " " -f1
+    # password: "3d2967ef58c55d83dffc74d56ff3faab"
     password: "pgpass"
+    encrypted: yes
   become: yes
   become_method: sudo
   become_user: postgres
